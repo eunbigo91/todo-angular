@@ -7,22 +7,27 @@
   </head>
 
   <body ng-app="todo" ng-controller="TodoCtrl">
-    <h1>Todo</h1>
+    <div class="container">
+        <h1>Things to do</h1>
+        <ul class="list-unstyled">
+            <li ng-repeat="todo in todos | filter:statusFilter">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <input type="checkbox" ng-model="todo.completed">
+                    </span>
+                    <input type="text" class="form-control" ng-model="todo.title">
+                    <span class="input-group-btn">
+                        <button class="btn btn-danger" type="button" ng-click="remove(todo)"> Delete </button>
+                    </span>
+                </div>
+                <date> {{ todo.createdAt | date:'yyyy-MM-dd'}}</date>
+            </li>
+        </ul>
+        <button class="btn btn-primary" ng-click="statusFilter={completed:true}">Completed</button>
+        <button class="btn btn-primary" ng-click="statusFilter={completed:false}">Active</button>
+        <button class="btn btn-primary" ng-click="statusFilter={}">All</button>
+    </div>
 
-    <ul class="list-unstyled">
-        <li ng-repeat="todo in todos">
-            <div class="input-group">
-                <span class="input-group-addon">
-                    <input type="checkbox" ng-model="todo.completed">
-                </span>
-                <input type="text" class="form-control" ng-model="todo.title">
-                <span class="input-group-btn">
-                    <button class="btn btn-danger" type="button" ng-click="remove(todo)"> Delete </button>
-                </span>
-            </div>
-            <date> {{ todo.createdAt | date:'yyyy-MM-dd'}}</date>
-        </li>
-    </ul>
   </body>
 
 </html>
