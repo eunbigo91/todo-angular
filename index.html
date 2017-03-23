@@ -9,6 +9,21 @@
   <body ng-app="todo" ng-controller="TodoCtrl">
     <div class="container">
         <h1>Things to do</h1>
+
+        <form name="todoForm" ng-submit="add(newTodoTitle)">
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="newTodoTitle" placeholder="Write a new thing to do" minlength="3" autofocus>
+                <span class="input-group-btn">
+                    <button class="btn btn-success" type="submit">Add</button>
+                </span>
+            </div>
+
+            <div ng-show="todoForm.$dirty && todoForm.$invalid">
+                <div class="alert alert-warning" role="alert"> Write more than three letters.
+                </div>
+            </div>
+        </form>
+
         <ul class="list-unstyled">
             <li ng-repeat="todo in todos | filter:statusFilter">
                 <div class="input-group">
