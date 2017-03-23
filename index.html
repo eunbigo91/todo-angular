@@ -3,44 +3,26 @@
     <script data-require="bootstrap@3.3.6" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script data-require="angularjs@1.5.8" data-semver="1.5.8" src="https://opensource.keycdn.com/angularjs/1.5.8/angular.min.js"></script>
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers.js"></script>
+    <script src="directive.js"></script>
+    <script src="services.js"></script>
   </head>
 
   <body ng-app="todo" ng-controller="TodoCtrl">
     <div class="container">
-        <h1>Things to do</h1>
 
-        <form name="todoForm" ng-submit="add(newTodoTitle)">
-            <div class="input-group">
-                <input type="text" class="form-control" ng-model="newTodoTitle" placeholder="Write a new thing to do" minlength="3" autofocus>
-                <span class="input-group-btn">
-                    <button class="btn btn-success" type="submit">Add</button>
-                </span>
-            </div>
+        <todo-title></todo-title>
 
-            <div ng-show="todoForm.$dirty && todoForm.$invalid">
-                <div class="alert alert-warning" role="alert"> Write more than three letters.
-                </div>
-            </div>
-        </form>
+        <todo-form></todo-form>
 
         <ul class="list-unstyled">
             <li ng-repeat="todo in todos | filter:statusFilter">
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        <input type="checkbox" ng-model="todo.completed">
-                    </span>
-                    <input type="text" class="form-control" ng-model="todo.title">
-                    <span class="input-group-btn">
-                        <button class="btn btn-danger" type="button" ng-click="remove(todo)"> Delete </button>
-                    </span>
-                </div>
-                <date> {{ todo.createdAt | date:'yyyy-MM-dd'}}</date>
+                <todo-item></todo-item>
             </li>
         </ul>
-        <button class="btn btn-primary" ng-click="statusFilter={completed:true}">Completed</button>
-        <button class="btn btn-primary" ng-click="statusFilter={completed:false}">Active</button>
-        <button class="btn btn-primary" ng-click="statusFilter={}">All</button>
+
+        <todo-filters></todo-filters>
     </div>
 
   </body>
